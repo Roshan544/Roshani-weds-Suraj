@@ -142,36 +142,29 @@ $(document).ready(function () {
     const music = document.getElementById("bgMusic");
 
     if (!music) {
-        console.log("❌ bgMusic element not found");
+        console.log("Music element not found");
         return;
     }
 
     music.volume = 0.5;
 
-    // Try autoplay
-    music.play()
-        .then(function () {
-            console.log("✅ Music started automatically");
-        })
-        .catch(function (error) {
-            console.log("⚠️ Autoplay blocked:", error);
+    function startMusic() {
 
-            // Start music on first user interaction
-            function startMusic() {
-                music.play()
-                    .then(function () {
-                        console.log("✅ Music started after user interaction");
-                    })
-                    .catch(function (error) {
-                        console.log("❌ Music failed:", error);
-                    });
+        music.play()
+            .then(function () {
+                console.log("Music started successfully");
+            })
+            .catch(function (error) {
+                console.log("Music could not be played:", error);
+            });
 
-                document.removeEventListener("click", startMusic);
-                document.removeEventListener("touchstart", startMusic);
-            }
+        // Remove listeners after first interaction
+        document.removeEventListener("click", startMusic);
+        document.removeEventListener("touchstart", startMusic);
+    }
 
-            document.addEventListener("click", startMusic);
-            document.addEventListener("touchstart", startMusic);
-        });
+    // Start music when user clicks/taps anywhere
+    document.addEventListener("click", startMusic);
+    document.addEventListener("touchstart", startMusic);
 
 });
