@@ -137,32 +137,41 @@ $(document).on("ready", function () {
 
 // ============ Background Music ============ //
 
-$(function () {
-  const music = document.getElementById("bgMusic");
+$(document).ready(function () {
 
-  // Set volume
-  music.volume = 0.5;
+    const music = document.getElementById("bgMusic");
 
-  // Try to play automatically
-  music.play().catch(function () {
-    console.log("Autoplay with sound was blocked by the browser.");
+    if (!music) {
+        console.log("❌ bgMusic element not found");
+        return;
+    }
 
-    // Try again when the visitor interacts with the website
-    const startMusic = function () {
-      music
-        .play()
+    music.volume = 0.5;
+
+    // Try autoplay
+    music.play()
         .then(function () {
-          console.log("Background music started.");
+            console.log("✅ Music started automatically");
         })
         .catch(function (error) {
-          console.log("Music could not be played:", error);
+            console.log("⚠️ Autoplay blocked:", error);
+
+            // Start music on first user interaction
+            function startMusic() {
+                music.play()
+                    .then(function () {
+                        console.log("✅ Music started after user interaction");
+                    })
+                    .catch(function (error) {
+                        console.log("❌ Music failed:", error);
+                    });
+
+                document.removeEventListener("click", startMusic);
+                document.removeEventListener("touchstart", startMusic);
+            }
+
+            document.addEventListener("click", startMusic);
+            document.addEventListener("touchstart", startMusic);
         });
 
-      document.removeEventListener("click", startMusic);
-      document.removeEventListener("touchstart", startMusic);
-    };
-
-    document.addEventListener("click", startMusic);
-    document.addEventListener("touchstart", startMusic);
-  });
 });
