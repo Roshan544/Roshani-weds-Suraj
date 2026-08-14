@@ -1128,3 +1128,42 @@ input::-webkit-inner-spin-button {
         min-height: 550px;
     }
 }
+
+/* Music Button */
+#musicBtn {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45px;
+    height: 45px;
+    border: 1px solid #614D38;
+    border-radius: 50%;
+    background: #fff;
+    color: #614D38;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 99999;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+#musicBtn:hover {
+    background: #614D38;
+    color: #fff;
+}
+
+#musicBtn i {
+    pointer-events: none;
+}
+
+@media (max-width: 767px) {
+    #musicBtn {
+        left: 15px;
+        width: 42px;
+        height: 42px;
+        font-size: 16px;
+    }
+}

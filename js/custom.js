@@ -140,31 +140,36 @@ $(document).on("ready", function () {
 $(document).ready(function () {
 
     const music = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicBtn");
 
-    if (!music) {
-        console.log("Music element not found");
+    if (!music || !musicBtn) {
+        console.log("Music elements not found");
         return;
     }
 
     music.volume = 0.5;
 
-    function startMusic() {
+    musicBtn.addEventListener("click", function () {
 
-        music.play()
-            .then(function () {
-                console.log("Music started successfully");
-            })
-            .catch(function (error) {
-                console.log("Music could not be played:", error);
-            });
+        if (music.paused) {
 
-        // Remove listeners after first interaction
-        document.removeEventListener("click", startMusic);
-        document.removeEventListener("touchstart", startMusic);
-    }
+            music.play()
+                .then(function () {
+                    musicBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+                    musicBtn.setAttribute("aria-label", "Pause music");
+                })
+                .catch(function (error) {
+                    console.log("Music could not be played:", error);
+                });
 
-    // Start music when user clicks/taps anywhere
-    document.addEventListener("click", startMusic);
-    document.addEventListener("touchstart", startMusic);
+        } else {
+
+            music.pause();
+
+            musicBtn.innerHTML = '<i class="fa-solid fa-music"></i>';
+            musicBtn.setAttribute("aria-label", "Play music");
+        }
+
+    });
 
 });
