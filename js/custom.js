@@ -6,17 +6,16 @@
 
 $(function () {
 
-  var targetDate = new Date(Date.UTC(2028, 3, 12));
+  // Wedding date: 24 November 2026, 12:00 AM IST
+  var targetDate = new Date("2026-11-24T00:00:00+05:30");
   var now = new Date();
 
-  window.days = daysBetween(now, targetDate);
-  var secondsLeft = secondsDifference(now, targetDate);
-  window.hours = Math.floor(secondsLeft / 60 / 60);
-  secondsLeft = secondsLeft - (window.hours * 60 * 60);
-  window.minutes = Math.floor(secondsLeft / 60);
-  secondsLeft = secondsLeft - (window.minutes * 60);
-  console.log(secondsLeft);
-  window.seconds = Math.floor(secondsLeft);
+  window.days = Math.floor((targetDate - now) / (1000 * 60 * 60 * 24));
+
+  var secondsLeft = Math.floor((targetDate - now) / 1000);
+  window.hours = Math.floor((secondsLeft % (60 * 60 * 24)) / (60 * 60));
+  window.minutes = Math.floor((secondsLeft % (60 * 60)) / 60);
+  window.seconds = secondsLeft % 60;
 
   startCountdown();
 });
