@@ -1167,3 +1167,21 @@ input::-webkit-inner-spin-button {
         font-size: 16px;
     }
 }
+
+@media (max-width: 767px) {
+
+    .Wedding_card_main_wrapper .wedding_box1 .wedding_detail_box .new,
+    .Wedding_card_main_wrapper .wedding_box1 .wedding_detail_box .old,
+    .Wedding_card_main_wrapper .wedding_box1 .wedding_detail_box .current {
+        color: #604C38;
+        position: absolute;
+        border-radius: 1rem;
+        height: 3rem;
+        left: 50%;
+        top: 50%;
+        font-size: 50px;
+        transform: translate(-50%, -50%);
+        width: 100%;
+    }
+
+}
