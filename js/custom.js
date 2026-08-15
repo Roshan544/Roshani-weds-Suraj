@@ -147,7 +147,7 @@ $(document).ready(function () {
         return;
     }
 
-    music.volume = 0.5;
+    music.volume = 1.0;
 
     musicBtn.addEventListener("click", function () {
 
